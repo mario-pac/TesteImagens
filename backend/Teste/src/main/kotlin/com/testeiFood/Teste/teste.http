@@ -1,0 +1,23 @@
+### PostImages
+POST    http://localhost/postImages
+Content-Type: application/json
+
+{
+    "url": "http://www.google.com.br"
+}
+
+### GetImages
+GET    http://localhost/getImages
+Content-Type: application/json
+
+{
+    "url": "http://www.google.com.br"
+}
+
+### GetImagesByIdAlbum
+GET    http://localhost/getImagesByIdAlbum
+Content-Type: application/json
+
+{
+    "url": "http://www.google.com.br"
+}
