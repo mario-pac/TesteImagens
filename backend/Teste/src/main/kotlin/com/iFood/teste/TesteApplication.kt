@@ -1,4 +1,4 @@
-package com.testeiFood.Teste
+package com.iFood.teste
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

@@ -1,11 +1,31 @@
-# -------------------------- DEPENDENCIES ------------------
-postgres: &POSTGRES
-  image: postgres:10.4
-# ------------------------- DEV ----------------------------
-postgres-dev:
-  <<: *POSTGRES
-  ports:
-    - 5432:5432
-  volumes:
-    - ./db/dev/databases.sql:/docker-entrypoint-initdb.d/1-dev-database.sql
-    - ./db/dev/roles.sql:/docker-entrypoint-initdb.d/2-dev-roles.sql
+version: '3.9'
+
+services:
+  kotlinapp:
+    container_name: kotlinapp
+    image: jmari/kotlinapp:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DB_URL: ${DB_URL}
+        PG_USER: ${PG_USER}
+        PG_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - '8080:8080'
+    environment:
+      DB_URL: jdbc:postgresql://database:5432/postgres
+      PG_USER: postgres
+      PG_PASSWORD: postgres
+    depends_on:
+      - database
+  database:
+    container_name: database
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '5432:5432'
+

@@ -1,4 +1,4 @@
-package com.testeiFood.Teste
+package com.iFood.teste
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
