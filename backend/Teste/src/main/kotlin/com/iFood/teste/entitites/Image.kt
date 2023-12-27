@@ -6,7 +6,6 @@ import jakarta.persistence.*
 @Table(name = "images")
 data class Image (
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int,
     val albumId: Int,
     val title: String,
