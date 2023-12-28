@@ -11,6 +11,9 @@ type CustomTheme = {
     height: number;
     background: string;
   };
+  text: {
+    primary: string;
+  };
 };
 
 export type AppTheme = CustomTheme;
@@ -27,6 +30,9 @@ const theme: AppTheme = {
   header: {
     height: 50,
     background: "#c3c3c3",
+  },
+  text: {
+    primary: "#1b2b3b",
   },
 };
 

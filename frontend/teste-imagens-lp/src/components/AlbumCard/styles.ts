@@ -1,20 +1,19 @@
 import styled from "styled-components";
 
-export const Container = styled.img`
-  margin-top: 6vh;
-`;
-
-export const Button = styled.button`
+export const Container = styled.button`
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.input.backgroundColor};
-  width: 16vw;
+  width: min-content;
+  height: min-content;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.28);
   }
 `;
 
 export const Text = styled.h3`
-  width: 15vw;
+  width: 15%;
   text-align: center;
   font-size: 1.2em;
   color: ${({ theme }) => theme.text.primary};
