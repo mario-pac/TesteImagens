@@ -6,6 +6,9 @@ WORKDIR /app
 # Copying everything from the current directory to the app directory
 COPY . .
 
+# Give execute permission to the gradlew script
+RUN chmod +x ./gradlew
+
 # Building the app
 RUN ./gradlew clean build -x test
 

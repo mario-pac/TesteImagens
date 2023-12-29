@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import * as S from "./styles";
 import Spacer from "../../Spacer";
+import ImageCard from "../../ImageCard";
+
 import { Image } from "../../../definitions/image";
 import { backendUrl } from "../../../utils/utils";
-import ImageCard from "../../../components/ImageCard";
-import { Navigate } from "react-router-dom";
+
+import * as S from "./styles";
 
 interface Props {
   albumId: number;
 }
 
 const AlbumView: React.FC<Props> = ({ albumId }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -27,11 +29,10 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
   const [images, setImages] = useState<Image[]>([]);
   const [filtered, setFiltered] = useState<Image[]>([]);
   const [filter, setFilter] = useState("");
-  const [image, setImage] = useState<Image>();
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   useEffect(() => {
     if (filter.length) {
@@ -40,11 +41,10 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
     } else {
       setFiltered([]);
     }
-  }, [filter]);
+  }, [filter, images]);
 
   return (
     <S.Container>
-      {image && <Navigate to={`/image/${image.id}`} replace={false} />}
       <h1 style={{ width: "100%", textAlign: "center" }}>Imagens do álbum</h1>
       <Spacer height={12} />
 
@@ -62,22 +62,24 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
       <S.AlbumsRenderer>
         {filter.length
           ? filtered.map((img, idx) => (
-              <ImageCard
-                src={img.thumbnailUrl}
-                key={idx}
-                alt={img.title}
-                title={img.title}
-                onClick={() => setImage(img)}
-              />
+              <a href={`/image/${img.id}`} style={{ textDecoration: "none" }}>
+                <ImageCard
+                  src={img.thumbnailUrl}
+                  key={idx}
+                  alt={img.title}
+                  title={img.title}
+                />
+              </a>
             ))
           : images.map((img, idx) => (
-              <ImageCard
-                src={img.thumbnailUrl}
-                key={idx}
-                alt={img.title}
-                title={img.title}
-                onClick={() => setImage(img)}
-              />
+              <a href={`/image/${img.id}`} style={{ textDecoration: "none" }}>
+                <ImageCard
+                  src={img.thumbnailUrl}
+                  key={idx}
+                  alt={img.title}
+                  title={img.title}
+                />
+              </a>
             ))}
       </S.AlbumsRenderer>
     </S.Container>

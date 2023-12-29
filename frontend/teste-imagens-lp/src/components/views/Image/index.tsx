@@ -9,6 +9,7 @@ interface Props {
 }
 
 const ImageView: React.FC<Props> = ({ imageId }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async () => {
     try {
       const response = await axios.get(backendUrl + `/images/byId/${imageId}`);
@@ -22,7 +23,7 @@ const ImageView: React.FC<Props> = ({ imageId }) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   return (
     <>

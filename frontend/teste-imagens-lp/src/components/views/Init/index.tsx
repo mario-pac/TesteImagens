@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import axios, { isAxiosError } from "axios";
-import { Navigate } from "react-router-dom";
 
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,8 +11,6 @@ import { backendUrl } from "../../../utils/utils";
 import * as S from "./styles";
 
 const InitView: React.FC = () => {
-  const [onSeeAlbums, setOnSeeAlbums] = useState<number>();
-
   const addData = async () => {
     try {
       const response = await axios.post(backendUrl + `/images/insertAllImages`);
@@ -62,17 +59,15 @@ const InitView: React.FC = () => {
         theme="light"
       />
 
-      {onSeeAlbums && <Navigate to={"/main"} replace={false} />}
       <h1>Teste de Imagens</h1>
       <Spacer height={25} />
       <Button title="Adicionar imagens" onClick={addData} />
       <Spacer height={50} />
       <Button title="Remover imagens" onClick={removeData} />
       <Spacer height={50} />
-      <Button
-        title="Ver álbuns cadastrados"
-        onClick={() => setOnSeeAlbums(1)}
-      />
+      <a href="/main" style={{ textDecoration: "none" }}>
+        <Button title="Ver álbuns cadastrados" />
+      </a>
     </S.Container>
   );
 };

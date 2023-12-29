@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import { Navigate } from "react-router-dom";
-
 import Spacer from "../../Spacer";
 import AlbumCard from "../../AlbumCard";
 
@@ -34,7 +32,7 @@ const MainView: React.FC = () => {
     } else {
       setFiltered([]);
     }
-  }, [filter]);
+  }, [filter, images]);
 
   useEffect(() => {
     fetchData();
@@ -42,7 +40,6 @@ const MainView: React.FC = () => {
 
   return (
     <S.Container>
-      {albumId && <Navigate to={`/album/${albumId}`} replace={false} />}
       <h1 style={{ width: "100%", textAlign: "center" }}>Seleção de álbuns</h1>
       <Spacer height={12} />
 
@@ -60,16 +57,20 @@ const MainView: React.FC = () => {
       <S.AlbumsRenderer>
         {filter.length
           ? filtered.map((alb) => (
-              <AlbumCard
-                title={"Álbum #" + alb.albumId}
-                onClick={() => setAlbumId(alb.albumId)}
-              />
+              <a href={`/album/${albumId}`} style={{ textDecoration: "none" }}>
+                <AlbumCard
+                  title={"Álbum #" + alb.albumId}
+                  onClick={() => setAlbumId(alb.albumId)}
+                />
+              </a>
             ))
-          : images.map((alb, idx) => (
-              <AlbumCard
-                title={"Álbum #" + (idx + 1)}
-                onClick={() => setAlbumId(alb.albumId)}
-              />
+          : images.map((alb) => (
+              <a href={`/album/${albumId}`} style={{ textDecoration: "none" }}>
+                <AlbumCard
+                  title={"Álbum #" + alb.albumId}
+                  onClick={() => setAlbumId(alb.albumId)}
+                />
+              </a>
             ))}
       </S.AlbumsRenderer>
     </S.Container>
