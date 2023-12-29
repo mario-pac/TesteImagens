@@ -17,15 +17,15 @@
   
     * Na pasta `./backend/teste`, o primeiro passo é subir o banco para o Docker:
   
-      `docker-compose up -d database`
+      `docker compose up -d database`
     
     * Após subir o banco, é necessário fazer o build do projeto:
   
-      `docker-compose build`
+      `docker compose build`
   
     * Após a build completa, pode subir o projeto completo para o Docker:
   
-      `docker-compose up`
+      `docker compose up`
 
   * Configurando o frontend
 
