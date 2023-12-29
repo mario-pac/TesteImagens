@@ -12,7 +12,7 @@ import { backendUrl } from "../../../utils/utils";
 import * as S from "./styles";
 
 const InitView: React.FC = () => {
-  const [onSeeAlbums, setOnSeeAlbums] = useState(false);
+  const [onSeeAlbums, setOnSeeAlbums] = useState<number>();
 
   const addData = async () => {
     try {
@@ -71,7 +71,7 @@ const InitView: React.FC = () => {
       <Spacer height={50} />
       <Button
         title="Ver álbuns cadastrados"
-        onClick={() => setOnSeeAlbums(true)}
+        onClick={() => setOnSeeAlbums(1)}
       />
     </S.Container>
   );
