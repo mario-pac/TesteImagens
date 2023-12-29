@@ -1,4 +1,4 @@
-# Seletor de imagens
+# 🖼️ Seletor de imagens
 
   Esse projeto tem como objetivo realizar uma gestão e seleção de imagens.
 
@@ -52,6 +52,6 @@
     * [Vite](https://vitejs.dev/) - Framework para criação do frontend
 
 
-# Autor
-
-  * [José Mário Pacheco](https://github.com/mario-pac)
+# 👨‍💼 Autor
+  
+  [José Mário Pacheco](https://github.com/mario-pac)
