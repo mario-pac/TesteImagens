@@ -7,7 +7,11 @@ WORKDIR /app
 COPY . .
 
 # Give execute permission to the gradlew script
-RUN chmod +x ./gradlew
+RUN if [ "$(uname -s)" = "Linux" ]; then \
+        chmod +x ./gradlew; \
+    elif [ "$(uname -s)" = "Darwin" ]; then \
+        chmod +x ./gradlew; \
+    fi
 
 # Building the app
 RUN ./gradlew clean build -x test
