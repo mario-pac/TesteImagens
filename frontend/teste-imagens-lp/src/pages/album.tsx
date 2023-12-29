@@ -5,7 +5,6 @@ import { useLoaderData } from "react-router-dom";
 
 const Album: React.FC = () => {
   const loaderData = useLoaderData();
-  console.log(`loaderData: ${loaderData}`);
 
   return <AlbumView albumId={(loaderData as { id: number }).id} />;
 };

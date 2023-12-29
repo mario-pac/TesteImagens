@@ -6,6 +6,7 @@ import Spacer from "../../Spacer";
 import { Image } from "../../../definitions/image";
 import { backendUrl } from "../../../utils/utils";
 import ImageCard from "../../../components/ImageCard";
+import { Navigate } from "react-router-dom";
 
 interface Props {
   albumId: number;
@@ -26,6 +27,7 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
   const [images, setImages] = useState<Image[]>([]);
   const [filtered, setFiltered] = useState<Image[]>([]);
   const [filter, setFilter] = useState("");
+  const [image, setImage] = useState<Image>();
 
   useEffect(() => {
     fetchData();
@@ -42,6 +44,7 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
 
   return (
     <S.Container>
+      {image && <Navigate to={`/image/${image.id}`} replace={false} />}
       <h1 style={{ width: "100%", textAlign: "center" }}>Imagens do álbum</h1>
       <Spacer height={12} />
 
@@ -54,16 +57,17 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
         Filtrar por nome da imagem:
       </h2>
 
-      <S.TextInput value={filter} />
+      <S.TextInput value={filter} onChange={(e) => setFilter(e.target.value)} />
       <Spacer height={48} />
       <S.AlbumsRenderer>
-        {filtered.length
+        {filter.length
           ? filtered.map((img, idx) => (
               <ImageCard
                 src={img.thumbnailUrl}
                 key={idx}
                 alt={img.title}
                 title={img.title}
+                onClick={() => setImage(img)}
               />
             ))
           : images.map((img, idx) => (
@@ -72,6 +76,7 @@ const AlbumView: React.FC<Props> = ({ albumId }) => {
                 key={idx}
                 alt={img.title}
                 title={img.title}
+                onClick={() => setImage(img)}
               />
             ))}
       </S.AlbumsRenderer>

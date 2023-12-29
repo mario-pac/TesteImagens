@@ -14,6 +14,7 @@ type CustomTheme = {
   text: {
     primary: string;
   };
+  button: string;
 };
 
 export type AppTheme = CustomTheme;
@@ -34,6 +35,7 @@ const theme: AppTheme = {
   text: {
     primary: "#1b2b3b",
   },
+  button: "#1E90FF",
 };
 
 export default theme;

@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import * as S from "./styles";
+import { Navigate } from "react-router-dom";
+
 import Spacer from "../../Spacer";
+import AlbumCard from "../../AlbumCard";
+
 import { Image } from "../../../definitions/image";
 import { backendUrl } from "../../../utils/utils";
-import AlbumCard from "../../AlbumCard";
-import { Navigate } from "react-router-dom";
+
+import * as S from "./styles";
 
 const MainView: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
@@ -26,7 +29,7 @@ const MainView: React.FC = () => {
 
   useEffect(() => {
     if (filter.length) {
-      const filt = images.filter((img) => img.id.toString().includes(filter));
+      const filt = images.filter((img) => img.albumId === Number(filter));
       setFiltered(filt);
     } else {
       setFiltered([]);
@@ -52,15 +55,22 @@ const MainView: React.FC = () => {
         Filtrar por número do álbum:
       </h2>
 
-      <S.TextInput value={filter} />
+      <S.TextInput value={filter} onChange={(e) => setFilter(e.target.value)} />
       <Spacer height={48} />
       <S.AlbumsRenderer>
-        {images.map((alb, idx) => (
-          <AlbumCard
-            title={"Álbum #" + (idx + 1)}
-            onClick={() => setAlbumId(alb.albumId)}
-          />
-        ))}
+        {filter.length
+          ? filtered.map((alb) => (
+              <AlbumCard
+                title={"Álbum #" + alb.albumId}
+                onClick={() => setAlbumId(alb.albumId)}
+              />
+            ))
+          : images.map((alb, idx) => (
+              <AlbumCard
+                title={"Álbum #" + (idx + 1)}
+                onClick={() => setAlbumId(alb.albumId)}
+              />
+            ))}
       </S.AlbumsRenderer>
     </S.Container>
   );
